@@ -17,9 +17,6 @@ jobs:
           POSTGRES_USER: tester
           POSTGRES_PASSWORD: tester123
           POSTGRES_DB: testdb
-        #注释掉ports run 脚本增加 `mkdir -p test-reports`
-        #ports:
-        #  - 5432:5432
         options: >-
           --health-cmd "pg_isready -U tester -d testdb"
           --health-interval 10s
@@ -40,12 +37,12 @@ jobs:
 
       - name: Run tests
         env:
-        #`DB_HOST: localhost` → **`DB_HOST: postgres`**
           DB_HOST: postgres
           DB_PORT: 5432
           DB_USER: tester
           DB_PASSWORD: tester123
           DB_NAME: testdb
+          PYTHONPATH: ${{ github.workspace }}
         run: |
           mkdir -p test-reports
           pytest -v --tb=short \
