@@ -17,8 +17,8 @@ jobs:
           POSTGRES_USER: tester
           POSTGRES_PASSWORD: tester123
           POSTGRES_DB: testdb
-        #ports:
-        #  - 5432:5432
+        ports:
+          - 5432:5432
         options: >-
           --health-cmd "pg_isready -U tester -d testdb"
           --health-interval 10s
